@@ -27,8 +27,6 @@ Image2D::Image2D(){
 
 Image2D::Image2D(int nx, int ny, int ngl, double milx, double mily, int p0){
 
-
-
     int width = nx;
     int height = ny;
     int size = 3 * width * height;

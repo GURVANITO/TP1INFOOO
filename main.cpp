@@ -95,13 +95,15 @@ int main()
 
     //TERCERA PARTE
     cout<<"Arrancamos"<<endl;
-    Image2D A;
-    Image2D X(800, 600, 255, 1, 1, 12);
+
+//    Image2D A;
+//    Image2D X(800, 600, 255, 1, 1, 12);
+//    Image2D B(f,1,1);
+
+
     char* f="mola.bmp";
-    Image2D B(f,1,1);
     char* f2="lena24.bmp";//char* f2="El_Capitan_SunsetBW.bmp";
     Image2D C(f2,1,1);
-
     FILE *fp;
     FILE *fp2;
     fp2=fopen("lena24.bmp","rb");
@@ -115,10 +117,8 @@ int main()
     unsigned char* image_and_en_tete_to_save = new unsigned char[size];
     for(int iD=0;iD<54;iD++)//the first 54 bytes
     {
-        cout << "test" <<endl;
         image_and_en_tete_to_save[iD]=info[iD];
-        cout <<iD<<image_and_en_tete_to_save[iD]<<endl;
-
+        //cout <<image_and_en_tete_to_save[iD]<<endl;
     }
 
     for (int i=0; i<C.getNbx(); i++) {
@@ -129,17 +129,13 @@ int main()
         }
     }
 
-   // fwrite(&tab, sizeof ptr[0][0],n,fp2);
     fclose(fp2);
+
     fp2=fopen("mola2.bmp","wb");
     fwrite(image_and_en_tete_to_save,sizeof(char),(54+C.getSize()*3),fp2);// fonction to read binary
     ///Closure
 
     fclose(fp2);
-
-
-
-
 
     return 0;
 }

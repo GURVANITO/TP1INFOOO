@@ -55,3 +55,31 @@
 1663926052 source:c:\users\gurva\onedrive\documents\cours\tpinfooo\point3d.cpp
 	"point3D.h"
 
+1663936032 source:d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\image2d.cpp
+	"Image2D.hpp"
+
+1663933552 d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\image2d.hpp
+	<stdio.h>
+	<iostream>
+	<tgmath.h>
+
+1663933552 source:d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\point2d.cpp
+	"point2D.h"
+
+1663933552 d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\point2d.h
+	<stdio.h>
+	<iostream>
+	<tgmath.h>
+
+1663933552 source:d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\point3d.cpp
+	"point3D.h"
+
+1663933552 d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\point3d.h
+	"point2D.h"
+
+1663935864 source:d:\boulot\universite rennes1\m2 se\git_repository\tpinfooo\main.cpp
+	<iostream>
+	"point2D.h"
+	"point3D.h"
+	"Image2D.hpp"
+
