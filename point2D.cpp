@@ -87,4 +87,3 @@ point2D::~point2D()
 
 }
 
-

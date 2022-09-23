@@ -27,6 +27,8 @@ Image2D::Image2D(){
 
 Image2D::Image2D(int nx, int ny, int ngl, double milx, double mily, int p0){
 
+
+
     int width = nx;
     int height = ny;
     int size = 3 * width * height;
@@ -225,12 +227,9 @@ void Image2D::init(int valeur_init){
 
 }
 
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> 0e6709d6f104905cfc72d18beee04551817d944c
 Image2D::~Image2D()
 {
     (*this).libere_partie_dynamique();
