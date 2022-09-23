@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1663926052 source:c:\users\gurva\onedrive\documents\cours\fichiertp\point3d.cpp
+	"point3D.h"
+
+1663926067 c:\users\gurva\onedrive\documents\cours\fichiertp\point3d.h
+	"point2D.h"
+
+1663918938 c:\users\gurva\onedrive\documents\cours\fichiertp\point2d.h
+	<stdio.h>
+	<iostream>
+	<tgmath.h>
+
+1663930097 source:c:\users\gurva\onedrive\documents\cours\fichiertp\image2d.cpp
+	"Image2D.hpp"
+
+1663930981 source:c:\users\gurva\onedrive\documents\cours\fichiertp\main.cpp
+	<iostream>
+	"point2D.h"
+	"point3D.h"
+	"Image2D.hpp"
+
+1663926405 c:\users\gurva\onedrive\documents\cours\fichiertp\image2d.hpp
+	<stdio.h>
+	<iostream>
+	<tgmath.h>
+
+1663924161 source:c:\users\gurva\onedrive\documents\cours\fichiertp\point2d.cpp
+	"point2D.h"
+
