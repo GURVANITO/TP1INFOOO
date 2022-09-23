@@ -32,7 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Image2D.cpp" />
+		<Unit filename="Image2D.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="point2D.cpp" />
+		<Unit filename="point2D.h" />
+		<Unit filename="point3D.cpp" />
+		<Unit filename="point3D.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
