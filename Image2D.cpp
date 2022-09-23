@@ -225,6 +225,12 @@ void Image2D::init(int valeur_init){
 
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 0e6709d6f104905cfc72d18beee04551817d944c
 Image2D::~Image2D()
 {
     (*this).libere_partie_dynamique();
