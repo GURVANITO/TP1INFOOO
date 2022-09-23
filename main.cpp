@@ -11,6 +11,10 @@
 #include "point3D.h"
 #include "Image2D.hpp"
 
+#define PHOTO "lena24.bmp"  // image BMP 24 bits a traiter
+#define PHOTO_DEST "lena_seuillage.bmp" //image BMP 24 bits seuillé
+
+
 using namespace std;
 
 int main()
@@ -130,12 +134,41 @@ int main()
     }
 
     fclose(fp2);
-
     fp2=fopen("mola2.bmp","wb");
     fwrite(image_and_en_tete_to_save,sizeof(char),(54+C.getSize()*3),fp2);// fonction to read binary
     ///Closure
 
     fclose(fp2);
 
+    //Seuillage
+    int  a;
+	int i;
+
+	//ouverture des fichiers bmp
+
+	fp=fopen(PHOTO,"rb");
+	fp2=fopen(PHOTO_DEST,"w+b");
+
+	// recopie de l'entete
+
+	for(i=0;i<54;i++)
+	{
+		fputc(fgetc(fp),fp2);
+	}
+
+	//traitement seuillage
+
+	while((a=fgetc(fp))!=EOF)
+	{
+		if(a>=0x79)
+		{fputc(a,fp2);
+		}
+		else
+		{fputc(0x00,fp2);
+		}
+	}
+
+	fclose(fp);
+    fclose(fp2);
     return 0;
 }

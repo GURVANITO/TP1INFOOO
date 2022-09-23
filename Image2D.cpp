@@ -225,8 +225,6 @@ void Image2D::init(int valeur_init){
 
 }
 
-
-
 Image2D::~Image2D()
 {
     (*this).libere_partie_dynamique();
