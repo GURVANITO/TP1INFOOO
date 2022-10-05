@@ -172,6 +172,33 @@ ptr[i][j]=a;
 }
 
 
+
+//
+//void Image2D::MASKOFF(char* path1,char* path2){
+//     FILE* f1 = fopen(path1, "rb");
+//     FILE* f2 = fopen(path2, "rb");
+//
+// for (int i=0; i<(*this).getNbx(); i++) {
+//        for (int j=0; j<(*this).getNby(); j++) {
+//
+//            if (D.getPixelValue(i,j) >150)
+//        {
+//            image_and_en_tete_to_save1[54+(i*(D.getNby())+j)*3]=(unsigned char)D.getPixelValue(i,j);
+//            image_and_en_tete_to_save1[54+1+(i*(D.getNby())+j)*3]=(unsigned char)D.getPixelValue(i,j);
+//            image_and_en_tete_to_save1[54+2+(i*(D.getNby())+j)*3]=(unsigned char)D.getPixelValue(i,j);
+//        }
+//            else {
+//                D.setPixelValue(i,j,0);
+//            }
+//    }
+//    }
+//
+//
+//}
+
+
+
+
 // allocation dynamique de mémoire via new..
 void Image2D::alloue_partie_dynamique(int dimx, int dimy){
     if ( dimx<=0 || dimy<=0 )
@@ -226,6 +253,71 @@ void Image2D::init(int valeur_init){
 
 
 }
+
+
+void Image2D::enregistreImage(char* path){
+
+FILE* f = fopen(path, "rb");
+
+
+
+unsigned char info3[54];
+//    fread(info3, sizeof(unsigned char), 54, fp3);
+ for(int iD3=0;iD3<54;iD3++)//the first 54 bytes
+    {
+        unsigned char* image_and_en_tete_to_save3 = new unsigned char[size];
+        image_and_en_tete_to_save3[iD3]=info3[iD3];
+        //cout <<iD<<image_and_en_tete_to_save[iD]<<endl;
+        //cout <<image_and_en_tete_to_save1[iD1]<<endl;
+    }
+//    unsigned char info[54];
+//    fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
+//    // extract image height and width from header
+//    int width = *(int*)&info[18];
+//    int height = *(int*)&info[22];
+//    int size = 3 * width * height;
+//    (*this).nbx=width;
+//    (*this).nby=height;
+//    (*this).size=width*height;
+//    unsigned char* image = new unsigned char[size]; // allocate 3 bytes per pixel
+//    unsigned char* imageBLU=new unsigned char[width*height];//definition of the RED
+//    unsigned char* imageGRE=new unsigned char[width*height];//definition of the GREEN
+//    unsigned char* imageRED=new unsigned char[width*height];//definition of the BLUE
+//
+//    fread(image,sizeof(unsigned char),size,f);//We fill the FULL image
+//    fclose(f);
+//
+//    for(int id=0;id<(width*height);id++)
+//    {
+//        imageBLU[id]=image[3*id];
+//        imageGRE[id]=image[3*id+1];
+//        imageRED[id]=image[3*id+2];
+//
+//    }
+//    (*this).alloue_partie_dynamique(width,height);
+//    for (int i=0; i<(*this).nbx; i++) {
+//        for (int j=0; j<(*this).nby; j++) {
+//            double mean=0;
+//            mean=((double)imageRED[i*((*this).nby)+j]+(double)imageBLU[i*((*this).nby)+j]+(double)imageGRE[i*((*this).nby)+j])/3.0;
+//                (*this).ptr[i][j]=(int)mean;
+//        }
+//    }
+
+   // fwrite(&tab, sizeof ptr[0][0],n,fp2);
+    fclose(f);
+    f=fopen("testtttttttttttt.bmp","wb");
+    for (int i=0; i<(*this).nbx; i++) {
+        for (int j=0; j<(*this).nby; j++) {
+    fwrite(ptr[i][j],sizeof(ptr[i][j]),1,f);// fonction to read binary
+    ///Closure
+        }
+    }
+    fclose(f);
+}
+
+
+
+
 
 
 
