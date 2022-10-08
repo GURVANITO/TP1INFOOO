@@ -192,14 +192,5 @@ fp1=fopen("mola.bmp","rb");
 
     fclose(fp1);
 
-
-
-
-
-
-
-
-
-
     return 0;
 }
