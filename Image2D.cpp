@@ -10,6 +10,9 @@
 
 using namespace std;
 
+void enregistrer_image(string filename, Image2D image);
+
+//CONSTRUCTION
 Image2D::Image2D(){
 
     int width = 128;
@@ -24,10 +27,7 @@ Image2D::Image2D(){
     }
 }
 
-
 Image2D::Image2D(int nx, int ny, int ngl, double milx, double mily, int p0){
-
-
 
     int width = nx;
     int height = ny;
@@ -68,9 +68,6 @@ Image2D::Image2D(int nx, int ny, int ngl, double milx, double mily, int p0){
     imageGRE=NULL;
 
 }
-
-
-
 
 Image2D::Image2D(char* path,double milx, double mily){
     FILE* f = fopen(path, "rb");
@@ -117,10 +114,9 @@ Image2D::Image2D(char* path,double milx, double mily){
     imageRED=NULL;
     delete [] imageGRE;
     imageGRE=NULL;
-
-
 }
 
+//SETTER - GETTER
 int Image2D::getNbx(){
     return nbx;
 }
@@ -160,13 +156,11 @@ double Image2D::getDy(){
 void Image2D::setDy(double a){
 dy=a;
 }
-
 int Image2D::getPixelValue(int i,int j){
 
 return ptr[i][j];
 
 }
-
 void Image2D::setPixelValue(int i,int j, int a){
 ptr[i][j]=a;
 }
@@ -190,7 +184,6 @@ void Image2D::alloue_partie_dynamique(int dimx, int dimy){
             exit ( 1 );
         }
     }
-
 }
 
 void Image2D::libere_partie_dynamique(){
@@ -223,14 +216,100 @@ void Image2D::init(int valeur_init){
         }
 
     }
-
-
 }
-
-
-
 
 Image2D::~Image2D()
 {
     (*this).libere_partie_dynamique();
 }
+
+// interpolation au plus proche voisin
+bool Image2D::pixel_is_in_image(int x,int y){ 
+    if(ptr[x][y]!= NULL){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+int Image2D::interpolation_nn_x(float x){       
+    int pos_x = static_cast<int>(ceil(x/dx));
+    if (pixel_is_in_image(pos_x,0)){
+        return pos_x;
+    }
+    else{
+        return NULL;
+    }
+}
+int Image2D::interpolation_nn_y(float y){       
+    int pos_y = static_cast<int>(ceil(y/dy));
+    if (pixel_is_in_image(0,pos_y)){
+        return pos_y;
+    }
+    else{
+        return NULL;
+    }
+}
+
+//Rotation de l'image
+void Image2D::rotation (float theta, char* filename){
+    Image2D newImage(filename,1,1);
+    long pixels = newImage.getSize();
+
+    double radians = (theta * M_PI) / 180;
+    int sinf = (int) sin(radians);
+    int cosf = (int) cos(radians);
+
+    double x0 = 0.5 * (newImage.getNbx() - 1);     // point to rotate about
+    double y0 = 0.5 * (newImage.getNby() - 1);     // center of image
+
+    // rotation
+    for (int x = 0; x < newImage.getNbx(); x++) {
+        for (int y = 0; y < newImage.getNby(); y++) {
+            long double a = x - x0;
+            long double b = y - y0;
+            int xx = (int) (+a * cosf - b * sinf + x0);
+            int yy = (int) (+a * sinf + b * cosf + y0);
+
+            if(xx>=0 && newImage.getNby() && yy>=0 && yy < newImage.getNby()){ 
+                newImage.setPixelValue(x,y,(yy*newImage.getNby()+xx));
+            } 
+        }
+    }
+    string new_filename = filename;
+    new_filename = "rotated_" + new_filename;
+    enregistrer_image(new_filename , newImage);
+    cout << "Rotation = no error";
+}
+
+//FONCTION EN LOCAL - Enregistrer image
+void enregistrer_image(string filename, Image2D image){
+    string fileName = "new_" + filename;
+    FILE *out = fopen(fileName.c_str(), "wb");
+
+    int i;
+    unsigned char tmp;
+    unsigned char* image_and_en_tete_to_save = new unsigned char[image.getSize()];
+
+    /*for (i = 0; i < image.getSize(); i += 3) {
+        tmp = image_and_en_tete_to_save[i];
+        image_and_en_tete_to_save[i] = image_and_en_tete_to_save[i + 2];
+        image_and_en_tete_to_save[i + 2] = tmp;
+    }*/
+    for (int i=0; i<image.getNbx(); i++) {
+        for (int j=0; j<image.getNby(); j++) {
+            image_and_en_tete_to_save[54+(i*(image.getNby())+j)*3]=(unsigned char)image.getPixelValue(i,j);
+            image_and_en_tete_to_save[54+1+(i*(image.getNby())+j)*3]=(unsigned char)image.getPixelValue(i,j);
+            image_and_en_tete_to_save[54+2+(i*(image.getNby())+j)*3]=(unsigned char)image.getPixelValue(i,j);
+        }
+    }
+    cout << "\nl'entête de l'image est : " << image_and_en_tete_to_save;
+    fwrite(image_and_en_tete_to_save, sizeof(unsigned char), image.getSize(), out); // read the rest of the data at once
+    fclose(out);
+}
+
+/*Image2D rotation(float theta)
+{
+
+}*/

@@ -38,6 +38,12 @@ public:
     int getPixelValue(int i,int j);
     void setPixelValue(int i,int j, int a);
 
+    bool pixel_is_in_image(int x, int y);
+    int interpolation_nn_x(float x);
+    int interpolation_nn_y(float y);
+
+    void rotation (float theta, char* filename);
+
 protected:
     int** ptr;//. Tels que ptr[i] représente un pointeur sur les valeurs des pixels de la ligne i et ptr[i][j] représente la valeur du pixel i,j.
     void alloue_partie_dynamique(int dimx, int dimy);// : fonction d’allocation dynamique prenant en argument le nombre de pixels en x et en y. Utilisez new.
